@@ -1,0 +1,4 @@
+To create a requirements.txt file: 
+- activate the project environment
+- navigate to the directory of your project 
+- run pip freeze > requirements.txt
