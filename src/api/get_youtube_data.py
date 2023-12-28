@@ -10,6 +10,7 @@ Functions include:
 
 import googleapiclient.discovery
 import pandas as pd
+from tqdm import tqdm
 
 
 def get_video_ids(youtube_service_object, channel_id: str, published_after, published_before, search_term: str = None):
@@ -109,8 +110,10 @@ def get_video_ids(youtube_service_object, channel_id: str, published_after, publ
     return video_ids
 
 
+
 def get_video_data(youtube_service_object, video_ids):
-    """Retrieves statistics for a given YouTube video ID.
+    """Retrieves statistics for a given YouTube video ID and creates a dataframe with data for the
+    videos that contain "tekken" in the title.
 
     Parameters
     ----------
@@ -122,15 +125,70 @@ def get_video_data(youtube_service_object, video_ids):
 
     Returns
     --------
-    df_ : dataframe
-        A dataframe with the data for each video ID.
+    df : dataframe
+        A dataframe with the data for video Ids whose title contains the word "tekken".
     
     """
 
+    all_data_dict = {}
+    
+    # split video_ids list into batches of 50 and process each batch using helper function
+    for index, batch_start in tqdm(enumerate(range(0, len(video_ids), 50))):
+        print(f"Batch {index+1} start: {batch_start}")
+        batch_end = min(batch_start + 50, len(video_ids))
+        print(f"Batch {index+1} end: {batch_end}")
+        batch_ids = video_ids[batch_start:batch_end]
+
+        # get data for the batch of <=50 video ids using helper function
+        batch_data = _get_video_data_for_batch(youtube_service_object, batch_ids)
+        all_data_dict.update(batch_data)
+
+
+    # create dataframe from dictionary data
+    df = (pd.DataFrame.from_dict(all_data_dict, orient="index")
+          .rename_axis("videoId")
+          .astype({"publishedAt": "datetime64[ns, UTC]", 
+                           "viewCount": "int64", 
+                           "likeCount": "int64", 
+                           "commentCount": "int64", 
+                           "favoriteCount": "int64"})
+          .drop_duplicates(subset=['videoId'])
+          .sort_values(by=["publishedAt"])
+          .reset_index(drop=True)
+         )
+
+    # add a line that drops rows where 'tekken' isn't in the video title
+    df = (df.loc[df['title'].str.lower().str.contains("tekken")]
+          .reset_index(drop=True))
+
+
+    return df
+
+
+
+def _get_video_data_for_batch(youtube_service_object, video_ids):
+    """Helper function that retrieves statistics for a given YouTube video ID, in batches 
+    of 50 video ids at a time.
+
+    Parameters
+    ----------
+    youtube_service_object : googleapiclient object
+        a service object created using `googleapiclinet.discovery.build`
+    
+    video_ids : list or str
+        A list of video IDs or a single string if only wanting to return data for one video ID.
+
+    Returns
+    -------
+    data_dict : dictionary
+        A dictionary with the data for the passed video IDs.
+    
+    """
+ 
     request = youtube_service_object.videos().list(
         part="snippet,statistics",
         maxResults=50,
-        id=video_ids,
+        id=video_ids
     )
     
     response = request.execute()
@@ -146,7 +204,7 @@ def get_video_data(youtube_service_object, video_ids):
                                          "publishedAt": response["items"][i]["snippet"]["publishedAt"],
                                          "title": response["items"][i]["snippet"]["title"],
                                          "description": response["items"][i]["snippet"]["description"],
-                                         "tags": response["items"][i]["snippet"]["tags"],
+                                         "tags": response["items"][0]["snippet"].get("tags"),   # use .get() so none is returned if 'tags' isn't present (video doesn't have tags)
                                          "viewCount": response["items"][i]["statistics"]["viewCount"],
                                          "likeCount": response["items"][i]["statistics"]["likeCount"],
                                          "commentCount": response["items"][i]["statistics"]["commentCount"],
@@ -174,7 +232,7 @@ def get_video_data(youtube_service_object, video_ids):
             )
             
             response = request.execute()
-            
+                
             # loop through response and store data about each video in a dictionary
             for i, v in enumerate(response["items"]):
                 data_dict_ = {
@@ -184,7 +242,7 @@ def get_video_data(youtube_service_object, video_ids):
                                                  "publishedAt": response["items"][i]["snippet"]["publishedAt"],
                                                  "title": response["items"][i]["snippet"]["title"],
                                                  "description": response["items"][i]["snippet"]["description"],
-                                                 "tags": response["items"][i]["snippet"]["tags"],
+                                                 "tags": response["items"][i]["snippet"].get("tags"),   # use .get() so none is returned if 'tags' isn't present (video doesn't have tags)
                                                  "viewCount": response["items"][i]["statistics"]["viewCount"],
                                                  "likeCount": response["items"][i]["statistics"]["likeCount"],
                                                  "commentCount": response["items"][i]["statistics"]["commentCount"],
@@ -194,26 +252,8 @@ def get_video_data(youtube_service_object, video_ids):
                 
                 # add the data to the data dictionary
                 data_dict.update(data_dict_)
-            
+        
             next_page_token = response.get("nextPageToken", None)
 
     
-    # create dataframe from dictionary data
-    df = (pd.DataFrame.from_dict(data_dict, orient="index")
-          .rename_axis("videoId")
-          .astype({"publishedAt": "datetime64[ns, UTC]", 
-                           "viewCount": "int64", 
-                           "likeCount": "int64", 
-                           "commentCount": "int64", 
-                           "favoriteCount": "int64"})
-          .drop_duplicates(subset=['videoId'])
-          .sort_values(by=["publishedAt"])
-          .reset_index(drop=True)
-         )
-
-    # add a line that drops rows where 'tekken' isn't in the video title
-    df = (df.loc[df['title'].str.lower().str.contains("tekken")]
-          .reset_index(drop=True))
-
-
-    return df
+    return data_dict
