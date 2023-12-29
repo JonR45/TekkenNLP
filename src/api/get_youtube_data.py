@@ -3,14 +3,14 @@
 
 Functions include:
     `get_video_ids(youtube_service_object, channel_id: str, published_after, published_before, search_term: str = None)`
-     `get_video_data(video_ids)`
-     `get_comments(youtube_service_object, video_ids)`
+    `get_video_data(video_ids)`
+    `get_top_level_comments(youtube_service_object, video_ids)`
 
 """
 
 import googleapiclient.discovery
 import pandas as pd
-from tqdm import tqdm
+from tqdm.notebook import tqdm
 
 
 def get_video_ids(youtube_service_object, channel_id: str, published_after, published_before, search_term: str = None):
@@ -257,3 +257,103 @@ def _get_video_data_for_batch(youtube_service_object, video_ids):
 
     
     return data_dict
+
+
+
+
+def get_top_level_comments(youtube_service_object, video_ids):
+    """Retrieves the commentThreads for a given YouTube video ID or list of video IDs.
+
+    Parameters
+    ----------
+    video_ids : list or str
+        A list of video IDs or a single string if only wanting to return data for one video ID.
+
+    Returns
+    --------
+    df : dataframe
+        A dataframe with the top level comments for the video ID.
+    
+    """
+
+    # check if the video_ids input is a single string or list
+    if isinstance(video_ids, str):
+        video_ids = [video_ids]
+  
+    
+    comments = []
+    
+    # loop through the remaining video ids, get the comments for these videos
+    for index, video_id in enumerate(video_ids): 
+        # make a request for first video id
+        request = youtube_service_object.commentThreads().list(
+            part="snippet",
+            videoId=video_id,  
+            order="time",
+            maxResults=50
+        )
+        
+        response = request.execute()
+        
+        for item in response['items']:
+            comment = item['snippet']['topLevelComment']['snippet']
+            comments.append([
+                comment['videoId'],
+                comment['authorDisplayName'],
+                comment['publishedAt'],
+                comment['updatedAt'],
+                comment['likeCount'],
+                item['snippet']['totalReplyCount'], # reply count not stored in same section of json response as all the others        
+                comment['textDisplay']
+            ])
+        
+        next_page_token = response.get("nextPageToken", None)
+        more_pages = True
+            
+        while more_pages == True:
+            if next_page_token is None:
+                more_pages = False
+        
+            else: 
+                # make a request to the youtube api to get the next page results   
+                request = youtube_service_object.commentThreads().list(
+                    part="snippet",
+                    videoId=video_id,
+                    order="time",
+                    maxResults=50,
+                    pageToken=next_page_token,
+                )
+                
+                response = request.execute()
+        
+                # loop through response and store data about each video in a dictionary
+                for item in response['items']:
+                    comment = item['snippet']['topLevelComment']['snippet']
+                    comments.append([
+                        comment['videoId'],
+                        comment['authorDisplayName'],
+                        comment['publishedAt'],
+                        comment['updatedAt'],
+                        comment['likeCount'],
+                        item['snippet']['totalReplyCount'], # reply count not stored in same section of json response as all the others        
+                        comment['textDisplay']
+                    ])
+        
+                
+                next_page_token = response.get("nextPageToken", None)         
+    
+        
+        
+        df = (pd.DataFrame(data=comments, columns=['videoId', 'authorDisplayName', 'publishedAt', 'updatedAt', 
+                                                  'likeCount', 'totalReplyCount', 'textDisplay'])
+                        .astype({"publishedAt": "datetime64[ns, UTC]", 
+                                 "updatedAt": "datetime64[ns, UTC]", 
+                                 "likeCount": "int64", 
+                                 "totalReplyCount": "int64"})
+                        .drop_duplicates(subset=["textDisplay"])
+                        .sort_values(by=["publishedAt"])
+                        .reset_index(drop=True)
+                       )
+    
+    
+    return df
