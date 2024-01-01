@@ -7,6 +7,7 @@
     `remove_emojis(text)`
     `remove_html(text)`
     `remove_html_unescape(text)`
+    `remove_digits(text)`
 
     
 
@@ -134,3 +135,56 @@ def remove_html_unescape(text):
 
     """
     return html.unescape(text)
+
+
+def remove_digits(text):
+    """Removes digits from the text.
+
+    Parameters
+    -----------
+    text : str
+        A string of text.
+
+    Returns
+    --------
+    text : str
+        The string of text without any digits.
+
+    """
+    pattern = r"\d"
+    
+    return re.sub(pattern, "", text)
+    
+
+def remove_extra_whitespace(text):
+    """Removes any unnecessary whitespace in a string, leaving a single space between words.
+
+    Parameters
+    -----------
+    text : str
+        The input string to process.
+
+    Returns
+    -------
+    The string with normalized whitespace.
+    
+    """
+
+    return re.sub(r"\s+", " ", text).strip()
+
+
+def remove_website_links(text):
+    """Removes website links from a string.
+    
+    Parameters
+    -----------
+    text : str
+        The input string to process.
+
+    Returns
+    --------
+    The string with website links removed.
+    """
+
+    pattern = r"(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?"  # Comprehensive pattern for URLs
+    return re.sub(pattern, "", text)
