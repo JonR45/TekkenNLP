@@ -4,6 +4,7 @@
     `remove_stop_words(text)`
     `tokenize_comment(text)`
     `lemmatize_comment(text)`
+    `remove_tekken_character_names_from_tokens`
     `part_of_speech_tagging(text)`
 
 
@@ -215,5 +216,41 @@ def part_of_speech_is_stop(text):
     stop_word = [token.is_stop for token in doc]
     
     return stop_word
+    
+
+def remove_tekken_character_names_from_tokens(tokens: list):
+    """Removes Tekken character names from the comments.
+
+    Parameters
+    ----------
+    df : pandas dataframe
+
+    Returns
+    -------
+    df : pandas dataframe
+        The input dataframe
+    
+    """
+    tokens_without_character_names = []
+    
+    tekken_character_names = ['alex', 'alisa', 'bosconovich', 'angel', 'anna', 'williams', 'armor', 'king', 'asuka', 'kazama', 'ayane', 
+                              'azazel', 'azucena', 'ortiz', 'baek', 'doo', 'san', 'bruce', 'irvin', 'bryan', 'fury', 'christie', 
+                              'monteiro', 'claudio', 'serafino', 'combot', 'cyclops', 'debug', 'devil', 'jin', 'doctor', 
+                              'bosconovitch', 'dragunov,', 'sergei', 'eddy', 'gordo', 'eddy', 'gordo', 'eliza', 'fahkumram', 'feng', 'wei', 'forest', 
+                              'law', 'ganryu', 'geese', 'howard', 'gigas', 'gon', 'heihachi', 'mishima', 'hwoarang', 'jack', 'jack-7', 
+                              'jack-8', 'jin', 'kazama', 'jinpachi', 'mishima', 'josie', 'rizal', 'julia', 'chang', 'jun', 'kazama', 
+                              'katarina', 'alves', 'kazumi', 'mishima', 'king', 'kuma', 'kunimitsu', 'lee', 'chaolan', 'leo','kliesen', 
+                              'leroy', 'smith', 'lidia', 'sobieska', 'lili', 'de', 'rochefort', 'ling', 'xiaoyu', 'lucky', 'chloe', 
+                              'marshall', 'law', 'master', 'raven', 'michelle', 'chang', 'miguel', 'rojo', 'mokujin', 'nancy-mi847j', 
+                              'negan', 'nina', 'williams', 'noctis', 'ogre', 'panda', 'paul', 'phoenix', 'rachel', 'reina', 'roger', 'jr', 
+                              'sake', 'steve', 'fox', 'tekken', 'force', 'soldier', 'true', 'ogre', 'victor', 'chevalier', 'violet', 
+                              'wang', 'jinrei', 'yoshimitsu', 'zafina']
+
+    
+    filtered_tokens = [word for word in tokens if word not in tekken_character_names]
+    
+    tokens_without_character_names.extend(filtered_tokens)
+
+    return filtered_tokens
 
     
