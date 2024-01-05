@@ -8,6 +8,8 @@
     `remove_html(text)`
     `remove_html_unescape(text)`
     `remove_digits(text)`
+    `remove_href_pattern(text)`
+    
 
     
 
@@ -188,3 +190,22 @@ def remove_website_links(text):
 
     pattern = r"(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?"  # Comprehensive pattern for URLs
     return re.sub(pattern, "", text)
+
+
+def remove_href_pattern(text):
+ """Removes any occurrences of "href" followed by non-whitespace characters until the next whitespace.
+
+ Parameters
+ -----------
+   text: str
+       The string of words to process.
+
+ Returns
+ ---------
+   text : str
+       The string with the "href" pattern removed.
+ """
+    
+ pattern = r"href\S+"
+    
+ return re.sub(pattern, "", text)

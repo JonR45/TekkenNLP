@@ -234,17 +234,17 @@ def remove_tekken_character_names_from_tokens(tokens: list):
     tokens_without_character_names = []
     
     tekken_character_names = ['alex', 'alisa', 'bosconovich', 'angel', 'anna', 'williams', 'armor', 'king', 'asuka', 'kazama', 'ayane', 
-                              'azazel', 'azucena', 'ortiz', 'baek', 'doo', 'san', 'bruce', 'irvin', 'bryan', 'fury', 'christie', 
+                              'azazel', 'azucena', 'bob', 'Richard', 'ortiz', 'baek', 'doo', 'san', 'bruce', 'irvin', 'bryan', 'fury', 'christie', 
                               'monteiro', 'claudio', 'serafino', 'combot', 'cyclops', 'debug', 'devil', 'jin', 'doctor', 
                               'bosconovitch', 'dragunov,', 'sergei', 'eddy', 'gordo', 'eddy', 'gordo', 'eliza', 'fahkumram', 'feng', 'wei', 'forest', 
                               'law', 'ganryu', 'geese', 'howard', 'gigas', 'gon', 'heihachi', 'mishima', 'hwoarang', 'jack', 'jack-7', 
-                              'jack-8', 'jin', 'kazama', 'jinpachi', 'mishima', 'josie', 'rizal', 'julia', 'chang', 'jun', 'kazama', 
+                              'jack-8', 'jin', 'kazama', 'jinpachi', 'pachi', 'mishima', 'josie', 'rizal', 'julia', 'chang', 'jun', 'kazama', 
                               'katarina', 'alves', 'kazumi', 'mishima', 'king', 'kuma', 'kunimitsu', 'lee', 'chaolan', 'leo','kliesen', 
                               'leroy', 'smith', 'lidia', 'sobieska', 'lili', 'de', 'rochefort', 'ling', 'xiaoyu', 'lucky', 'chloe', 
                               'marshall', 'law', 'master', 'raven', 'michelle', 'chang', 'miguel', 'rojo', 'mokujin', 'nancy-mi847j', 
                               'negan', 'nina', 'williams', 'noctis', 'ogre', 'panda', 'paul', 'phoenix', 'rachel', 'reina', 'roger', 'jr', 
-                              'sake', 'steve', 'fox', 'tekken', 'force', 'soldier', 'true', 'ogre', 'victor', 'chevalier', 'violet', 
-                              'wang', 'jinrei', 'yoshimitsu', 'zafina']
+                              'sake', 'steve', 'fox', 'tekken', 'force', 'soldier', 'true', 'ogre', 'trueogre', 'victor', 'chevalier', 'violet', 
+                              'wang', 'jinrei', 'yoshimitsu', 'zafina', 'lei', 'wulong', 'craig', 'marduk']
 
     
     filtered_tokens = [word for word in tokens if word not in tekken_character_names]
