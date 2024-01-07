@@ -4,8 +4,14 @@
     `remove_stop_words(text)`
     `tokenize_comment(text)`
     `lemmatize_comment(text)`
-    `remove_tekken_character_names_from_tokens`
-    `part_of_speech_tagging(text)`
+    `part_of_speech(text)`
+    `part_of_speech_tag(text)`
+    `part_of_speech_dependency(text)`
+    `part_of_speech_alpha(text)`
+    `part_of_speech_shape(text)`
+    `part_of_speech_is_stop(text)`
+    `remove_tekken_character_names_from_tokens(tokens)`
+    `remove_tiny_tokens(tokens)`
 
 
 """
@@ -252,5 +258,23 @@ def remove_tekken_character_names_from_tokens(tokens: list):
     tokens_without_character_names.extend(filtered_tokens)
 
     return filtered_tokens
+
+
+def remove_tiny_tokens(tokens):
+    """Removes tokens with less than 3 characters e.g., "fd", "a" etc.
+
+    Parameters
+    ----------
+    tokens : list
+        The list of tokens.
+
+    Returns
+    -------
+    tokens : list
+        The input list without tokens containing <=2 characters.
+    
+    """
+    return [token for token in tokens if len(token) >2]
+    
 
     
