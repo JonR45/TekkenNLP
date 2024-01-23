@@ -12,6 +12,7 @@
     `part_of_speech_is_stop(text)`
     `remove_tekken_character_names_from_tokens(tokens)`
     `remove_tiny_tokens(tokens)`
+    `word_count(text)`
 
 
 """
@@ -275,6 +276,26 @@ def remove_tiny_tokens(tokens):
     
     """
     return [token for token in tokens if len(token) >2]
+
+
+
+def word_count(text):
+    """Splits a string of a text by a space, turns it into a list and returns
+    the length of the list to provide the number of words in the input string.
+
+    Parameters
+    -----------
+    text : str
+        A string of text.
+
+    Returns
+    -------
+    word_count : integer
+        The number of words in the input string.
+    """
+    number_of_words = len(str(text).split(' '))
+
+    return number_of_words
     
 
     
