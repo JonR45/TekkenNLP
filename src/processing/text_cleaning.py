@@ -5,13 +5,13 @@
     `process_contractions(text)`
     `remove_all_punctuation(text)`
     `remove_emojis(text)`
+    `remove_extra_whitespace(text)`
     `remove_html(text)`
     `remove_html_unescape(text)`
     `remove_digits(text)`
     `remove_href_pattern(text)`
-    
+    `remove_website_links(text)`
 
-    
 
 """
 

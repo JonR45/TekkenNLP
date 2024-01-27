@@ -12,7 +12,11 @@
     `part_of_speech_is_stop(text)`
     `remove_tekken_character_names_from_tokens(tokens)`
     `remove_tiny_tokens(tokens)`
+    `unique_words_from_tokens(tokens)`
     `word_count(text)`
+
+    # Not used
+    `tokenize_string(text)` # this achieves the same result as toeknize_comment()
 
 
 """
@@ -279,6 +283,28 @@ def remove_tiny_tokens(tokens):
 
 
 
+
+def unique_words_from_tokens(tokens): 
+    """Function that removes duplicate words from a list of tokens.
+
+    Parameters
+    -----------
+    tokens : list
+        List of tokens.
+
+    Returns
+    -------
+    unique_words_list : list
+        List of unique words in the input list.
+    
+    
+    """
+    unique_words_list = []
+    [unique_words_list.append(x) for x in tokens if x not in unique_words_list]
+    return unique_words_list
+
+
+
 def word_count(text):
     """Splits a string of a text by a space, turns it into a list and returns
     the length of the list to provide the number of words in the input string.
@@ -296,6 +322,40 @@ def word_count(text):
     number_of_words = len(str(text).split(' '))
 
     return number_of_words
+
+
+def tokenize_string(text):
+    """Uses a regex pattern to extract sequences of two or more word characters (letters, digits, and underscores) as 
+    tokens. Whitespace characters (spaces, tabs, newlines) act as natural boundaries between tokens. 
     
+    
+    Used as part of topic modeling project and will be used to take a string of topics and create a list.
+
+    Parameters
+    -----------
+
+
+    Returns
+    --------
+    A list of strings, where each string represents a single word extracted from the input text.
+
+
+    Notes
+    ------
+    r"\w\w+":
+        The pattern seeks two consecutive word characters, encountering a non-word character (including whitespace) prevents further 
+        matching, effectively treating it as a word boundary.
+
+    Example
+    --------
+    Input: 
+        tokenize_topic("cat dog tree chocolate.")
+    
+    Output: 
+        ['cat', 'dog', 'tree', 'chocolate']
+    
+    """
+    
+    return re.findall(r"\w\w+", text)
 
     
