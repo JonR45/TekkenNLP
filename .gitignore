@@ -32,6 +32,12 @@
 
 
 ### data
+/data/raw/comments_3_videos_test.csv
+/data/raw/ultimate_edition_trailer_comments.csv
+/data/raw/video_data.csv
+/data/raw/
+/data/raw/
+
 
 ### folders
 /docs/**
@@ -60,12 +66,12 @@
 /notebooks/2.4.remove_tekken_character_names.ipynb
 /notebooks/2.5.parts_of_speech.ipynb
 /notebooks/2.6.remove_tiny_tokens.ipynb
-/notebooks/
-/notebooks/
-/notebooks/
-/notebooks/
-/notebooks/
-/notebooks/
+/notebooks/3.0.eda.ipynb
+/notebooks/4.0.model_LDA.ipynb
+/notebooks/4.1.LDA.ipynb
+/notebooks/4.2.0.NMF.ipynb
+/notebooks/4.2.1.NMF-5-topics.ipynb
+/notebooks/4.3.LSA.ipynb
 
 
 
