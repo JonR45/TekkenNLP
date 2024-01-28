@@ -255,7 +255,7 @@ def remove_tekken_character_names_from_tokens(tokens: list):
                               'marshall', 'law', 'master', 'raven', 'michelle', 'chang', 'miguel', 'rojo', 'mokujin', 'nancy-mi847j', 
                               'negan', 'nina', 'williams', 'noctis', 'ogre', 'panda', 'paul', 'phoenix', 'rachel', 'reina', 'roger', 'jr', 
                               'sake', 'steve', 'fox', 'tekken', 'force', 'soldier', 'true', 'ogre', 'trueogre', 'victor', 'chevalier', 'violet', 
-                              'wang', 'jinrei', 'yoshimitsu', 'zafina', 'lei', 'wulong', 'craig', 'marduk']
+                              'wang', 'jinrei', 'yoshimitsu', "yoshi", 'zafina', 'lei', 'wulong', 'craig', 'marduk']
 
     
     filtered_tokens = [word for word in tokens if word not in tekken_character_names]
