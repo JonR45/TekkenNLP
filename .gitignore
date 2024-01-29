@@ -82,6 +82,11 @@
 /src/api/get_data_youtube_comments.py
 
 /src/models/visualisations/
+/data/raw/comments_3_videos_test.csv
+/data/raw/comments.csv
+/data/raw/ultimate_edition_trailer_comments.csv
+/data/raw/video_data.csv
+
 
 
 
