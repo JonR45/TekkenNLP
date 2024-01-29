@@ -1,25 +1,33 @@
-# PROJCT TTILE
+# Tekken8 Topic Modeling - Extracting topics being discussed in YoutTube comments
 
 # Project Overview
+- **Programming language**: Python
+- **Problem type**: Unsupervised Natural Language Processing
+- **Dataset**: YouTube top level comments obtained from the YouTube API
+- **Models**: Latent Dirichlet Allocation (LDA), Non-negative Matrix Factorisation (NMF)
+- **Notes**: tidbits
+- **Conclusion**:
+
+  
+## Objective
+Gain insight into the topics being discussed in response to the _'New character reveal'_ YouTube video.
+
+## Key results:
+- Human interpretable topics
+- Coherence score of >0.4.
+- Perplexity?
 
 
+## Models
+- LDA - why chose it, results
+- NMF- why chose it - results
 
-# Summary
-- problem, language
-- Dataset
-- model
-- interesting tidbits
-- conclusion
-
-
-# Model
-## Error rates
-
-# Analysis
-
-# Visualisation
+# Visualisation
+Coherence score visual
+HTML visuals
 
 # Next steps
+
 
 # Installation and Running the Project
 

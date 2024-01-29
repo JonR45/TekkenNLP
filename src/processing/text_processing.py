@@ -244,18 +244,17 @@ def remove_tekken_character_names_from_tokens(tokens: list):
     """
     tokens_without_character_names = []
     
-    tekken_character_names = ['alex', 'alisa', 'bosconovich', 'angel', 'anna', 'williams', 'armor', 'king', 'asuka', 'kazama', 'ayane', 
-                              'azazel', 'azucena', 'bob', 'Richard', 'ortiz', 'baek', 'doo', 'san', 'bruce', 'irvin', 'bryan', 'fury', 'christie', 
-                              'monteiro', 'claudio', 'serafino', 'combot', 'cyclops', 'debug', 'devil', 'jin', 'doctor', 
-                              'bosconovitch', 'dragunov,', 'sergei', 'eddy', 'gordo', 'eddy', 'gordo', 'eliza', 'fahkumram', 'feng', 'wei', 'forest', 
-                              'law', 'ganryu', 'geese', 'howard', 'gigas', 'gon', 'heihachi', 'mishima', 'hwoarang', 'jack', 'jack-7', 
-                              'jack-8', 'jin', 'kazama', 'jinpachi', 'pachi', 'mishima', 'josie', 'rizal', 'julia', 'chang', 'jun', 'kazama', 
-                              'katarina', 'alves', 'kazumi', 'mishima', 'king', 'kuma', 'kunimitsu', 'lee', 'chaolan', 'leo','kliesen', 
-                              'leroy', 'smith', 'lidia', 'sobieska', 'lili', 'de', 'rochefort', 'ling', 'xiaoyu', 'lucky', 'chloe', 
-                              'marshall', 'law', 'master', 'raven', 'michelle', 'chang', 'miguel', 'rojo', 'mokujin', 'nancy-mi847j', 
-                              'negan', 'nina', 'williams', 'noctis', 'ogre', 'panda', 'paul', 'phoenix', 'rachel', 'reina', 'roger', 'jr', 
-                              'sake', 'steve', 'fox', 'tekken', 'force', 'soldier', 'true', 'ogre', 'trueogre', 'victor', 'chevalier', 'violet', 
-                              'wang', 'jinrei', 'yoshimitsu', "yoshi", 'zafina', 'lei', 'wulong', 'craig', 'marduk']
+    tekken_character_names = ['akuma', 'alex', 'alisa', 'alves', 'angel', 'anna', 'armor', 'asuka', 'ayane', 'azazel', 'azucena', 'baek', 'bob', 'bobb', 'bosconovich', 
+                              'bosconovitch', 'bruce', 'bryan', 'chang', 'chang', 'chaolan', 'chevalier', 'chloe', 'christie', 'claudio', 'combot', 'craig',
+                              'cyclops', 'de', 'debug', 'devil', 'doctor', 'doo', 'dragunov', 'eddie', 'eddy', 'eddy', 'eddychristie', 'eliza', 'fahkumram',
+                              'feng', 'force', 'forest', 'fox', 'fury', 'ganryu', 'geese', 'gigas', 'gon', 'gordo', 'gordo', 'heihachi', 'howard', 'hwoarang',
+                              'irvin', 'jack', 'jack-7', 'jack-8', 'jin', 'jin', 'jinpachi', 'jinrei', 'josie', 'jr', 'julia', 'jun', 'katarina',
+                              'kazama', 'kazama', 'kazama', 'kazumi', 'kazuya', 'kazuya', 'king', 'king', 'kliesen', 'kuma', 'kunimitsu', 'law', 'lee',
+                              'lei', 'leo', 'leroy', 'lidia', 'lili', 'ling', 'lucky', 'lydia', 'marduk', 'marsxhall', 'master', 'michelle', 'miguel',
+                              'mishima','mishima', 'mishima', 'mokujin', 'monteiro', 'nancy-mi847j', 'negan', 'nina', 'nina williams', 'ninawilliams',
+                              'noctis', 'ogre', 'ogre', 'ortiz', 'pachi', 'panda', 'paul', 'phoenix', 'rachel', 'raven', 'reina', 'richard', 'rizal',
+                              'rochefort', 'roger', 'rojo', 'sake', 'san', 'serafino', 'sergei', 'saheen', 'shaheen', 'smith', 'sobieska', 'soldier', 'steve', 'tekken', 'true',
+                              'trueogre', 'victor', 'violet', 'wang', 'wei', 'williams', 'wulong', 'xiaoyu', 'yoshi', 'yoshimitsu', 'yoshimitsus', 'zafina']
 
     
     filtered_tokens = [word for word in tokens if word not in tekken_character_names]

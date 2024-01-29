@@ -13,6 +13,7 @@
 /src/api/.ipynb_checkpoints/**
 /src/data/.ipynb_checkpoints/**
 /src/models/.ipynb_checkpoints/**
+/src/models/visualisations/.ipynb_checkpoints/**
 /src/processing/.ipynb_checkpoints/**
 /src/utils/.ipynb_checkpoints/**
 /src/visualisation/.ipynb_checkpoints/**
@@ -73,6 +74,13 @@
 /notebooks/4.2.1.NMF-5-topics.ipynb
 /notebooks/4.3.LSA.ipynb
 
+
+
+### files
+/src/api/get_comments.py
+/src/api/get_data_youtube_comments.py
+
+/src/models/visualisations/
 
 
 
