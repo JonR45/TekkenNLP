@@ -1,5 +1,6 @@
 ### admin files
 .DS_Store
+.gitattributes
 
 
 ### checkpoints 
