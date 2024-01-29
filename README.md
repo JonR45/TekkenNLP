@@ -19,8 +19,29 @@ Gain insight into the topics being discussed in response to the _'New character 
 
 
 ## Models
-- LDA - why chose it, results
-- NMF- why chose it - results
+### LDA
+- The LDA model's aim of identifying the underlying topics within a document matched my use case.
+- I wanted to use a model that assumed each document (YouTube comment) was a topic and that documents are made up of words that aid in determining the topic.
+- I was most interested in determining topics rather than the relationship between words within each document.
+
+### NMF
+- I hoped the NMF model would be more powerful due to its dimensionality reduction and placing comparatively less weightage to the words with less coherence.
+- NMF is said to act like a filter that can uncover the underlying patterns that really matter - and I hoped this would prove true in this use case.
+
+## Evaluation
+### Coherence
+LDA: 
+NMF:
+
+### Perplexity
+LDA:
+NMF:
+
+### Human interpretabiliity of the topics
+LDA: 
+
+NMF:
+
 
 # Visualisation
 Coherence score visual
