@@ -28,6 +28,7 @@
 /src/api/__pycache__/**
 /src/data/__pycache__/**
 /src/models/__pycache__/**
+/src/models/visualisations/__pycache__/**
 /src/processing/__pycache__/**
 /src/utils/__pycache__/**
 /src/visualisation/__pycache__/**
@@ -80,13 +81,6 @@
 ### files
 /src/api/get_comments.py
 /src/api/get_data_youtube_comments.py
-
-/src/models/visualisations/
-/data/raw/comments_3_videos_test.csv
-/data/raw/comments.csv
-/data/raw/ultimate_edition_trailer_comments.csv
-/data/raw/video_data.csv
-
 
 
 

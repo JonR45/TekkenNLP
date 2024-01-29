@@ -1,4 +1,4 @@
-# Tekken8 Topic Modeling - Extracting topics being discussed in YoutTube comments
+# Tekken8 Topic Modeling YouTube comments
 
 # Project Overview
 - **Programming language**: Python
@@ -15,7 +15,7 @@ Gain insight into the topics being discussed in response to the _'New character 
 ## Key results:
 - Human interpretable topics
 - Coherence score of >0.4.
-- Perplexity?
+- Perplexity score of <20
 
 
 ## Models
