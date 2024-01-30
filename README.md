@@ -10,7 +10,7 @@
 
   
 ## Objective
-Gain insight into the topics being discussed in response to the _'New character reveal'_ YouTube video.
+Identify the topics being discussed in response to the _'New character reveal'_ YouTube video.
 
 ## Key results:
 - Human interpretable topics
