@@ -1,25 +1,21 @@
 # topic_dataframe.py
 """Module contains functions that create topics and build them into a dataframe:
 
-    ``
-    ``
-    ``
-    ``
-    ``
-
+    `_heaviest_words_indices(topic, number_of_words)`
+    ``topic_dataframe((model, feature_names, number_of_words))
 
 """
 
 import pandas as pd
 
-def _heaviest_words_indices(topic, number_of_words):
+def _heaviest_words_indices(topic_words_weights, number_of_words):
     """Helper function that returns the x number of words that have been given the greatest 
-    weight for a given topic. Used as part of the `topic_dataframe` function.
+    weight for a given topic. Used as a helper for the `topic_dataframe` function.
 
 
     Parameters
     ----------
-    topic : numpy array
+    topic_words_weights : numpy array
         A numpy array that contains the weights given to each word within a topic. The array will 
         be the length of the number of features (words) for a given corpus.
 
@@ -69,23 +65,7 @@ def topic_dataframe(model, feature_names, number_of_words):
     topics = {}
     for topic_index, topic in enumerate(model.components_):
         t = (topic_index)
-        topics[t] = [feature_names[i] for i in _heaviest_words_indices(topic, number_of_words)]
+        topics[t] = [feature_names[i] for i in _heaviest_words_indices(topic_words_weights, number_of_words)]
     
     return pd.DataFrame(topics)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
