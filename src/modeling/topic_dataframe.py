@@ -8,14 +8,14 @@
 
 import pandas as pd
 
-def _heaviest_words_indices(topic_words_weights, number_of_words):
+def _heaviest_words_indices(topic, number_of_words):
     """Helper function that returns the x number of words that have been given the greatest 
     weight for a given topic. Used as a helper for the `topic_dataframe` function.
 
 
     Parameters
     ----------
-    topic_words_weights : numpy array
+    topic : numpy array
         A numpy array that contains the weights given to each word within a topic. The array will 
         be the length of the number of features (words) for a given corpus.
 
@@ -26,13 +26,13 @@ def _heaviest_words_indices(topic_words_weights, number_of_words):
 
     Returns
     --------
-    The indices of the x number_of_words with the greatest weight. i.e., the x mist important words
+    The indices of the x number_of_words with the greatest weight. i.e., the x most important words
     within a topic.
     
     """
     
     return topic.argsort()[:-number_of_words - 1:-1]   # step of -1 reverses the order so we extract the indices in descending order, starting 
-                                                       # with the highest-scoring word
+                                                                     # with the highest-scoring word
 
 
 
@@ -65,7 +65,7 @@ def topic_dataframe(model, feature_names, number_of_words):
     topics = {}
     for topic_index, topic in enumerate(model.components_):
         t = (topic_index)
-        topics[t] = [feature_names[i] for i in _heaviest_words_indices(topic_words_weights, number_of_words)]
+        topics[t] = [feature_names[i] for i in _heaviest_words_indices(topic, number_of_words)]
     
     return pd.DataFrame(topics)
 
