@@ -1,16 +1,18 @@
-# Tekken8 Topic Modeling YouTube comments
+# Tekken8: Topic Modelling YouTube comments
 
 # Project Overview
 - **Programming language**: Python
 - **Problem type**: Unsupervised Natural Language Processing
 - **Dataset**: YouTube top level comments obtained from the YouTube API
 - **Models**: Latent Dirichlet Allocation (LDA), Non-negative Matrix Factorisation (NMF)
-- **Notes**: tidbits
-- **Conclusion**:
+- **Notes**:
+    - LDA model used Bag of Words for vectorizing, NMF used TD-IDF.
+    - Bigram and trigram models were created for the LDA model.
+- **Conclusion**: LDA model produced interpretable topics and evaluation scores (coherence 0.44, perplexity -7.47) that met the key results and objective.
 
   
 ## Objective
-Identify human interpretable topics being discussed in response to the _'New character reveal'_ YouTube video.
+1. Identify human interpretable topics being discussed in response to the Tekken 8 _'New character reveal'_ YouTube video.
 
 ## Key results:
 - Topics identified
@@ -30,24 +32,18 @@ Identify human interpretable topics being discussed in response to the _'New cha
 - NMF is said to act like a filter that can uncover the underlying patterns that really matter - and I hoped this would prove true in this use case.
 
 ## Evaluation
-**Coherence**
-
-
-LDA: 
-NMF:
-
-**Perplexity**
-
-
-LDA:
-NMF:
-
+- The LDA model yielded a coherence score of 0.44 and a perplexity score of -7.47.
+- The LDA model's topics were also interpretable and so this model was chosen over the NMF model.
 
 
 # Visualisation
-Coherence score visual
-HTML visuals
+![coherence_score](/images/coherence_score_0.464_number_of_topics_30.png)
+NMF model: finding the number of topics with the highest coherence score
+
+![comment_1_tfidf_scores](/images/tfidf_viz_comment_1.png)
 
 # Conclusion
-- 
+- The LDA model met the key objective and key results.
+- Next steps would be to see if this model could be improved on through tweaking the number of topics.
+- Topic modeling could also be attempted with BERTopic to see if this produced a better model.
 
